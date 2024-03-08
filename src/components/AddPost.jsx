@@ -14,6 +14,7 @@ const AddPost = () => {
   const [categoryError, setCategoryError] = useState('');
   const [isPostAdded, setIsPostAdded] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isCreating, setIsCreating] = useState(false); // State for tracking post creation
 
   // Handle form submission
   const handleAddPost = async (e) => {
@@ -46,6 +47,9 @@ const AddPost = () => {
       return;
     }
 
+    // Set isCreating to true to show "Creating..." in the button
+    setIsCreating(true);
+
     try {
       // Get IDs of selected categories
       const selectedCategoryIds = categories
@@ -64,12 +68,14 @@ const AddPost = () => {
       setTitle('');
       setContent('');
       setSelectedCategories([]);
+      setIsCreating(false); // Reset isCreating after post is added
 
       setTimeout(() => {
         setIsPostAdded(false);
       }, 1500);
     } catch (error) {
       console.error('Error adding post:', error);
+      setIsCreating(false); // Reset isCreating on error
     }
   };
 
@@ -112,19 +118,12 @@ const AddPost = () => {
   return (
     <div className="mx-2 bg-gradient-to-b from-purple-900 to-purple-600 py-12 px-4 sm:px-6 lg:px-8 flex justify-center items-center rounded-xl">
       <div className="bg-white rounded-lg overflow-hidden shadow-lg p-6 sm:p-8 w-full max-w-[900px]">
-        {!isFormVisible && (
-          <button
-            onClick={toggleFormVisibility}
-            className="block mx-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all hover:scale-105"
-          >
-            Create a Post
-          </button>
-        )}
+
 
         <div className={`form-container ${isFormVisible ? 'show' : ''}`}>
           <button
             onClick={closeForm}
-            className="mb-10 block mx-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all hover:scale-105"
+            className="mb-10 block mx-auto bg-purple-600 md:hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all md:hover:scale-105"
           >
             Close
           </button>
@@ -140,7 +139,7 @@ const AddPost = () => {
                 {categories.map((category) => (
                   <div
                     key={category.id}
-                    className={`mx-auto text-center min-w-[180px] hover:bg-purple-500 transition category-container border rounded-lg p-2 cursor-pointer ${selectedCategories.includes(category.name) ? 'bg-purple-500' : 'border-purple-500'
+                    className={`mx-auto text-center min-w-[180px] md:hover:bg-purple-500 transition category-container border rounded-lg p-2 cursor-pointer ${selectedCategories.includes(category.name) ? 'bg-purple-500' : 'border-purple-500'
                       }`}
                     onClick={() => toggleCategory(category.name)}
                   >
@@ -153,7 +152,7 @@ const AddPost = () => {
               </div>
               {categoryError && <p className="text-red-500 text-sm mt-1 text-center mt-3">{categoryError}</p>}
               <div
-                className="mt-10 mx-auto sm:max-w-[200px] category-container border border-purple-500 rounded-lg p-2 bg-purple-500 hover:bg-purple-900 transition  flex items-center justify-center cursor-pointer"
+                className="mt-10 mx-auto sm:max-w-[200px] category-container border border-purple-500 rounded-lg p-2 bg-purple-500 md:hover:bg-purple-900 transition  flex items-center justify-center cursor-pointer"
                 onClick={handleShowAddCategoryModal}
               >
                 <span className="text-lg font-semibold transition text-white text-center">Create New Category</span>
@@ -201,14 +200,23 @@ const AddPost = () => {
             <div className='flex items-center gap-5'>
               <button
                 type="submit"
-                className="block bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all hover:scale-105"
+                className={`block bg-purple-600 md:hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all md:hover:scale-105 ${isCreating ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={isCreating}
               >
-                Create
+                {isCreating ? 'Creating...' : 'Create'}
               </button>
               {isPostAdded && <p className="text-green-500 text-sm mt-1">Post added successfully!</p>}
             </div>
           </form>
         </div>
+        {!isFormVisible && (
+          <button
+            onClick={toggleFormVisibility}
+            className="block mx-auto bg-purple-600 md:hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transform transition-all md:hover:scale-105"
+          >
+            Create a Post
+          </button>
+        )}
       </div>
       {showAddCategoryModal && (
         <AddCategoryModal onClose={handleCloseAddCategoryModal} />

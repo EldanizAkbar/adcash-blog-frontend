@@ -9,6 +9,20 @@
 }
 
 
+/* Header.css */
+header {
+    background-color: #ffb32c;
+}
+
+header p {
+    color: white;
+    font-weight: 700;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+
+
 /* AddPost.css */
 .form-container {
     opacity: 0;
@@ -25,15 +39,24 @@
     color: white;
 }
 
-
-/* Header.css */
-header {
-    background-color: #ffb32c;
+::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
 }
 
-header p {
-    color: white;
-    font-weight: 700;
-    font-size: 1.5em;
-    margin: 0;
+/* Track styles (the area behind the scrollbar) */
+::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+/* Handle styles (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+    background-color: purple;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Handle on hover styles */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(89, 5, 89);
 }

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { set } from 'react-hook-form';
 
 // Create context
 export const BlogContext = createContext();
@@ -9,6 +10,7 @@ export const BlogContextProvider = ({ children }) => {
     // State for categories and posts
     const [categories, setCategories] = useState([]);
     const [posts, setPosts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     // Fetch categories and posts on component mount
     useEffect(() => {
@@ -21,6 +23,7 @@ export const BlogContextProvider = ({ children }) => {
         try {
             const response = await axios.get('https://stark-mountain-97075-931483a868a1.herokuapp.com/api/categories/');
             setCategories(response.data.categories);
+            setIsLoading(false);
         } catch (error) {
             console.error('Error fetching categories:', error);
         }
@@ -49,6 +52,7 @@ export const BlogContextProvider = ({ children }) => {
         try {
             const response = await axios.get('https://stark-mountain-97075-931483a868a1.herokuapp.com/api/posts/');
             setPosts(response.data);
+            setIsLoading(false);
         } catch (error) {
             console.error('Error fetching posts:', error);
         }
@@ -104,7 +108,7 @@ export const BlogContextProvider = ({ children }) => {
 
     // Provide the context values to the children components
     return (
-        <BlogContext.Provider value={{ categories, addCategory, posts, addPost, deletePost, updatePost }}>
+        <BlogContext.Provider value={{ categories, addCategory, posts, addPost, deletePost, updatePost, isLoading }}>
             {children}
         </BlogContext.Provider>
     );
