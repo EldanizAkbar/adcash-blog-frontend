@@ -35,8 +35,13 @@ header p {
     max-height: 2000px;
 }
 
-.category-container:hover span {
-    color: white;
+
+
+@media screen and (min-width: 768px) {
+    .category-container:hover span {
+        color: white;
+    }
+    
 }
 
 ::-webkit-scrollbar {
