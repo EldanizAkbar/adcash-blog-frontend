@@ -1,0 +1,39 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.welcome-message {
+    font-size: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+
+/* AddPost.css */
+.form-container {
+    opacity: 0;
+    max-height: 0;
+    transition: opacity 1s ease, max-height 0.3s ease;
+}
+
+.form-container.show {
+    opacity: 1;
+    max-height: 2000px;
+}
+
+.category-container:hover span {
+    color: white;
+}
+
+
+/* Header.css */
+header {
+    background-color: #ffb32c;
+}
+
+header p {
+    color: white;
+    font-weight: 700;
+    font-size: 1.5em;
+    margin: 0;
+}
