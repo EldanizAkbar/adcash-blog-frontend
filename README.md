@@ -4,7 +4,7 @@ Welcome to the Adcash Blog Frontend repository! This project contains the fronte
 
 ## Demo link - [Adcash Blog Website](https://adcash-blog.vercel.app/)
 
-## Project Back-end - [Adcash Blog Front-End](https://github.com/EldanizAkbar/adcash-blog-backend)
+## Project Back-end - [Adcash Blog Back-End](https://github.com/EldanizAkbar/adcash-blog-backend)
 
 ## Features
 
@@ -67,6 +67,10 @@ Welcome to the Adcash Blog Frontend repository! This project contains the fronte
 ## API Integration
 
 The frontend interacts with the backend API provided by the ``` adcash-blog-backend ``` repository. Ensure that the backend server is running and accessible.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://mit-license.org/) file for details.
 
 
 ## Acknowledgements
